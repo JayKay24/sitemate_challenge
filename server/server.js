@@ -11,6 +11,7 @@ app.get('/issues/:id', validateId, function (req, res) {
   try {
     const issue = service.getIssue(req.params.id);
     return res.status(200).json({ ...issue });
+
   } catch (error) {
     return res.status(error.status).json({ error: error.message });
   }
