@@ -6,7 +6,7 @@ class IssueTracker {
   }
 
   create(title, description) {
-    const issue = { id: (Date.now()).getMilliseconds().toString(), title, description };
+    const issue = { id: (new Date()).getMilliseconds().toString(), title, description };
     this.issues.push(issue);
     return issue;
 
