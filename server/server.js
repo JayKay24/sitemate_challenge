@@ -19,7 +19,7 @@ app.get('/issues/:id', validateId, function (req, res) {
 
 app.post('/issues/', validateBody, function (req, res) {
   const { title, description } = service.get(req.body);
-  const issue = service.createIssue(title, description);
+  const issue = service.create(title, description);
   return res.status(201).json({ ...issue });
 });
 
