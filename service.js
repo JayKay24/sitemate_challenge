@@ -1,6 +1,6 @@
 const { NotFoundException } = require("./errors");
 
-export class IssueTracker {
+class IssueTracker {
   constructor() {
     this.issues = [];
   }
@@ -37,3 +37,5 @@ export class IssueTracker {
     return true;
   }
 }
+
+module.exports = IssueTracker;
