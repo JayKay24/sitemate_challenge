@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
 const Service = require('./service');
+const { validateBody, validateId } = require("./middleware");
 
 const service = new Service();
 
-app.get('/issues/:id', function (req, res) {
+app.use(express.json());
+
+app.get('/issues/:id', validateId, function (req, res) {
   try {
     const issue = service.getIssue(req.params.id);
     return res.status(200).json({ ...issue });
@@ -13,13 +16,13 @@ app.get('/issues/:id', function (req, res) {
   }
 })
 
-app.post('/issues/', function (req, res) {
+app.post('/issues/', validateBody, function (req, res) {
   const { title, description } = service.getIssue(req.body);
   const issue = service.createIssue(title, description);
   return res.status(201).json({ ...issue });
 });
 
-app.put('/issues/:id', function (req, res) {
+app.put('/issues/:id', validateId, validateBody, function (req, res) {
   const { id } = req.params;
   const { title, description } = req.body;
   
@@ -31,7 +34,7 @@ app.put('/issues/:id', function (req, res) {
   }
 });
 
-app.delete('/issues/:id', function (req, res) {
+app.delete('/issues/:id', validateId, function (req, res) {
   const { id } = req.params;
   
   try {
