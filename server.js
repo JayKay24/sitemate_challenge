@@ -1,11 +1,19 @@
 const express = require('express');
 const app = express();
 
-app.get('/', function (req, res) {
+app.get('issues/:id', function (req, res) {
   res.send('Hello World');
 })
 
-app.post('/', function (req, res) {
+app.post('issues/', function (req, res) {
+  res.send('Hello World');
+});
+
+app.put('issues/:id', function (req, res) {
+  res.send('Hello World');
+});
+
+app.delete('issues/:id', function (req, res) {
   res.send('Hello World');
 });
 
