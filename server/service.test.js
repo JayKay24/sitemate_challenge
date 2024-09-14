@@ -5,6 +5,11 @@ const issueObj = {
     description: 'some description'
 };
 
+const updatedIssueObj = {
+    title: 'some updated issue',
+    description: 'some updated description'
+};
+
 describe('create an issue', () => {
     test('it instantiates with zero issues', () => {
         const service = new Service();
@@ -38,5 +43,20 @@ describe('create an issue', () => {
         const service = new Service();
 
         expect(service.get('fake id')).toThrow();
+    });
+
+    test('it updates an issue with the correct issue id', () => {
+        const service = new Service();
+
+        service.create(issueObj.title, issueObj.description);
+
+        const [issue] = service.getAll();
+
+        service.update(issue.id, updatedIssueObj.title, updatedIssueObj.description);
+
+        const [updatedIssue] = service.get(issue.id);
+
+        expect(updatedIssue.title).toBe(updatedIssueObj.title);
+        expect(updatedIssue.description).toBe(updatedIssueObj.description);
     });
 });
