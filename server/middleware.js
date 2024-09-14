@@ -1,7 +1,7 @@
 const logger = require('./helpers/logger');
 
 const logPayload = (req, res, next) => {
-  logger.info(req.body);
+  logger('info', req.body);
   next();
 };
 
