@@ -17,6 +17,6 @@ $ docker-compose down
 ## How to run unit tests for the server
 Go to the projects root directory
 ```
-$ cd sitemate_challenge
+$ cd sitemate_challenge/server
 $ npm run test
 ```
