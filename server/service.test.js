@@ -33,4 +33,10 @@ describe('create an issue', () => {
 
         expect(service.get(issue.id)).toEqual(issue);
     });
+
+    test('it throws with wrong issue id', () => {
+        const service = new Service();
+
+        expect(service.get('fake id')).toThrow();
+    });
 });
