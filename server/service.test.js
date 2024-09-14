@@ -81,4 +81,10 @@ describe('create an issue', () => {
 
         expect(newIssues.length).toEqual(0);
     });
+
+    test('it throws when deleting with fake id', () => {
+        const service = new Service();
+
+        expect(() => service.delete('fake id')).toThrow();
+    });
 });
