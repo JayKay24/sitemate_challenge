@@ -2,10 +2,17 @@ const express = require('express');
 const app = express();
 const Service = require('./service');
 const { validateBody, validateId } = require("./middleware");
+const cors = require('cors');
+
+app.use(cors());
+app.use(express.json());
 
 const service = new Service();
 
-app.use(express.json());
+app.get('/issues', (req, res) => {
+  const issues = service.getAll();
+  return res.status(200).json(issues);
+});
 
 app.get('/issues/:id', validateId, function (req, res) {
   try {
@@ -17,8 +24,8 @@ app.get('/issues/:id', validateId, function (req, res) {
   }
 })
 
-app.post('/issues/', validateBody, function (req, res) {
-  const { title, description } = service.get(req.body);
+app.post('/issues', validateBody, function (req, res) {
+  const { title, description } = req.body;
   const issue = service.create(title, description);
   return res.status(201).json({ ...issue });
 });
