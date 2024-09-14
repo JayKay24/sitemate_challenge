@@ -19,8 +19,18 @@ describe('create an issue', () => {
 
         service.create(issueObj.title, issueObj.description);
 
-        const issues = service.issues
+        const issues = service.getAll();
 
-        expect(service.issues.length).toEqual(1);
+        expect(issues.length).toEqual(1);
+    });
+
+    test('it gets an issue with correct id', () => {
+        const service = new Service();
+
+        service.create(issueObj.title, issueObj.description);
+
+        const [issue] = service.getAll();
+
+        expect(service.get(issue.id)).toEqual(issue);
     });
 });
