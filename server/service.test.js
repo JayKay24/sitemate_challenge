@@ -42,7 +42,7 @@ describe('create an issue', () => {
     test('it throws with wrong issue id', () => {
         const service = new Service();
 
-        expect(service.get('fake id')).toThrow();
+        expect(() => service.get('fake id')).toThrow();
     });
 
     test('it updates an issue with the correct issue id', () => {
@@ -54,9 +54,15 @@ describe('create an issue', () => {
 
         service.update(issue.id, updatedIssueObj.title, updatedIssueObj.description);
 
-        const [updatedIssue] = service.get(issue.id);
+        const updatedIssue = service.get(issue.id);
 
         expect(updatedIssue.title).toBe(updatedIssueObj.title);
         expect(updatedIssue.description).toBe(updatedIssueObj.description);
+    });
+
+    test('it throws with wrong issue id', () => {
+        const service = new Service();
+
+        expect(() => service.update('fake id', updatedIssueObj.title, updatedIssueObj.description)).toThrow();
     });
 });
