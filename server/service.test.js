@@ -65,4 +65,20 @@ describe('create an issue', () => {
 
         expect(() => service.update('fake id', updatedIssueObj.title, updatedIssueObj.description)).toThrow();
     });
+
+    test('it deletes an issue', () => {
+        const service = new Service();
+
+        service.create(issueObj.title, issueObj.description);
+
+        const issues = service.getAll();
+
+        expect(issues.length).toEqual(1);
+
+        service.delete(issues[0].id);
+
+        const newIssues = service.getAll();
+
+        expect(newIssues.length).toEqual(0);
+    });
 });
